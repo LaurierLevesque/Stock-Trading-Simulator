@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+<table>
+    <thead>
+        <tr>
+            <th>Stock</th>
+            <th>Shares</th>
+            <th>Price</th>
+            <th>Holding Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in shares %}
+            <tr>
+                <td>{{ row.symbol.upper() }}</td>
+                <td>{{ row["SUM(shares)"] }}</td>
+                <td>{{ row["price"] }}</td>
+                <td>{{ row["holding_value"] | usd }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div></div>
+<p>
+    Current cash balance: {{ user_cash }}
+    <br>
+    Total portfolio value: {{ user_cash + shares_value }}
+</p>
+{% endblock %}
